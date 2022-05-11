@@ -31,11 +31,14 @@ export const QuizSelect=()=> {
     const[dataState]=ConnectApi(API_URL);
     console.log(dataState);
   return (
+   
+
     <React.Fragment>
+      <Header />
     <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
     <CssBaseline />
-    <Header />
-    <Container maxWidth="sm" component="main"  >
+    
+    <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }} >
       <Typography
         component="h1"
         variant="h2"
@@ -48,7 +51,7 @@ export const QuizSelect=()=> {
       <Typography
         variant="h5"
         align="center"
-        color="textSecondary"
+        color="text.secondary"
         component="p"
       >
         We've got all the quizzes you love to binge! The world's largest
@@ -57,27 +60,35 @@ export const QuizSelect=()=> {
       </Typography>
     </Container>
     <Container maxWidth="md" component="main" >
+      
       <Grid container spacing={5} alignItems="flex-end">
         {dataState.data.map((q) => (
-          <Grid item key={q.title} xs={12} md={4}>
+          <Grid item key={q.title} xs={12}
+          sm={q.title === 'Enterprise' ? 12 : 6}
+          md={4}>
             <Card>
               <CardHeader
                 title={q.title}
                 titleTypographyProps={{ align: "center" }}
                 subheaderTypographyProps={{ align: "center" }}
                 sx={{
-                    backgroundcolor: grey
+                  backgroundColor: (theme) =>
+                    theme.palette.mode === 'light'
+                      ? theme.palette.grey[200]
+                      : theme.palette.grey[700],
                 }}
               />
               <CardContent>
-                <div  sx={{
-                        backgroundColor:
-                        grey
+                <Box    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'baseline',
+                      mb: 2,
                     }}>
-                  <Typography component="h2" variant="h6" color="textPrimary">
+                  <Typography component="h2" variant="h6" color="text.primary">
                     Random Quiz
                   </Typography>
-                </div>
+                </Box>
                 <ul>
                   <Typography
                     component="li"
@@ -111,6 +122,7 @@ export const QuizSelect=()=> {
     </Container>
     <Footer />
   </React.Fragment>
+
   )
 }
 

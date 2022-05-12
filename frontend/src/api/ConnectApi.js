@@ -6,7 +6,7 @@ const useCollectData=(url) =>{
     const [fetch, setFetching]=useState({isFetching: false});
     const [dataState, setDataState]= useState({data: []});
     const [apiurl]=useState(url);
-
+   
     useEffect(()=>{
         const fetchDataFromApi = async () =>{
             try{

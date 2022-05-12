@@ -29,7 +29,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 export const QuizSelect=()=> {
     const API_URL = "http://127.0.0.1:8000/quiz/";
     const[dataState]=ConnectApi(API_URL);
-    console.log(dataState);
+
   return (
    
 
@@ -60,7 +60,7 @@ export const QuizSelect=()=> {
       </Typography>
     </Container>
     <Container maxWidth="md" component="main" >
-      
+
       <Grid container spacing={5} alignItems="flex-end">
         {dataState.data.map((q) => (
           <Grid item key={q.title} xs={12}
@@ -110,7 +110,7 @@ export const QuizSelect=()=> {
                   fullWidth
                   variant="outlined"
                   color="primary"
-                  href="http://localhost:3000/r/django"
+                  href="http://localhost:3000/r/Templates/"
                 >
                   Start Quiz
                 </Button>

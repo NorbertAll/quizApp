@@ -32,6 +32,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
+import { areArraysEqual } from "@mui/base"
 export const RandomQuiz = ()=>{
     const { topic } =useParams();
     const API_URL = "http://127.0.0.1:8000/quiz/r/"+topic+'/';
@@ -40,6 +41,14 @@ export const RandomQuiz = ()=>{
    
     const ac=a.length
     const [answer, setAnswer]=useState({});
+
+
+    useEffect(()=>{
+        if(Object.keys(answer).length===0){
+            setAnswer(createInitialAnswer());
+        }
+    },[answer])
+    console.log(answer);
 
     const handleSelection = (e) =>{
         setAnswer({...answer, [e.target.value]:e.target.checked})
@@ -53,12 +62,20 @@ export const RandomQuiz = ()=>{
         return object;
     };
 
-    useEffect(()=>{
-        if(Object.keys(answer).length===0){
-            setAnswer(createInitialAnswer());
+    const checkAnswer = (e) => {
+
+        e.preventDefault();
+        let n=a.map((obj)=>obj.is_right);
+        let y ={...n};
+        let o= Object.values(y);
+        let p= Object.values(answer);
+        if(areArraysEqual(o, p )){
+            alert("correct")
+        }else{
+            alert("incorrect")
         }
-    },[answer])
-    console.log(answer);
+        console.log(y);
+    }
 
 
 
@@ -83,7 +100,7 @@ export const RandomQuiz = ()=>{
                                     />
                                 </RadioGroup>
                             ))}
-                            <Button type="submit" variant="contained" endIcon={<SendIcon />} >
+                            <Button type="submit" variant="contained" endIcon={<SendIcon />} onClick={checkAnswer} >
                                 Submit Answer
                             </Button>
                         </div>

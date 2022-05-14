@@ -62,7 +62,10 @@ export const QuizSelect=()=> {
     <Container maxWidth="md" component="main" >
 
       <Grid container spacing={5} alignItems="flex-end">
-        {dataState.data.map((q) => (
+      {console.log(dataState.data)}
+        {
+          
+        dataState.data.map((q) => (
           <Grid item key={q.title} xs={12}
           sm={q.title === 'Enterprise' ? 12 : 6}
           md={4}>
@@ -104,13 +107,14 @@ export const QuizSelect=()=> {
                     50 questions
                   </Typography>
                 </ul>
+                {console.log("http://localhost:3000/r/"+q.title+"/")}
               </CardContent>
               <CardActions>
                 <Button
                   fullWidth
                   variant="outlined"
                   color="primary"
-                  href="http://localhost:3000/r/Templates/"
+                  href={"http://localhost:3000/r/"+q.title+"/"}
                 >
                   Start Quiz
                 </Button>

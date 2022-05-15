@@ -3,34 +3,11 @@ import Header from './framework/Header'
 import Footer from './framework/Footer'
 import React, {useState, useEffect} from 'react'
 import ConnectApi from '../api/ConnectApi'
-
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-
-
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-
-import Grid from '@mui/material/Grid';
-import StarIcon from '@mui/icons-material/StarBorder';
-import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
-import { grey } from '@mui/material/colors';
-import { light } from '@mui/material/styles/createPalette';
-import GlobalStyles from '@mui/material/GlobalStyles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { AlertTitle, Checkbox, FormControlLabel } from '@mui/material';
-import { Alert } from '@mui/material';
+import {  Checkbox, FormControlLabel } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
 import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import { areArraysEqual } from "@mui/base"
 export const RandomQuiz = ()=>{
@@ -48,7 +25,7 @@ export const RandomQuiz = ()=>{
             setAnswer(createInitialAnswer());
         }
     },[answer])
-    console.log(answer);
+    
 
     const handleSelection = (e) =>{
         setAnswer({...answer, [e.target.value]:e.target.checked})
@@ -74,7 +51,7 @@ export const RandomQuiz = ()=>{
         }else{
             alert("incorrect")
         }
-        console.log(y);
+        
     }
 
 
@@ -82,7 +59,7 @@ export const RandomQuiz = ()=>{
     return(
         <React.Fragment>
             <Header/>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" >
                 <div>
                     {dataState.data.map(({title, answer}, i)=>(
                         <div key={i}>

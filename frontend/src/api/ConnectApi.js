@@ -22,6 +22,7 @@ const useCollectData=(url) =>{
 
         }
         fetchDataFromApi();
+        
     }, [])
     return [dataState]
 

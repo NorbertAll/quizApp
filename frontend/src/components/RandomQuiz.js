@@ -5,7 +5,7 @@ import React, {useState, useEffect} from 'react'
 import ConnectApi from '../api/ConnectApi'
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {  Checkbox, FormControlLabel } from '@mui/material';
+import {  Alert, AlertTitle, Checkbox, FormControlLabel, Link } from '@mui/material';
 import RadioGroup from '@mui/material/RadioGroup';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
@@ -18,7 +18,7 @@ export const RandomQuiz = ()=>{
    
     const ac=a.length
     const [answer, setAnswer]=useState({});
-
+    const [answerCheck, setAnswerCheck]=useState({});
 
     useEffect(()=>{
         if(Object.keys(answer).length===0){
@@ -39,6 +39,7 @@ export const RandomQuiz = ()=>{
         return object;
     };
 
+
     const checkAnswer = (e) => {
 
         e.preventDefault();
@@ -46,16 +47,45 @@ export const RandomQuiz = ()=>{
         let y ={...n};
         let o= Object.values(y);
         let p= Object.values(answer);
-        if(areArraysEqual(o, p )){
-            alert("correct")
+
+        function arrayEquals(o, p){
+            return(Array.isArray(o)&& Array.isArray(p)&&o.length === p.length&& o.every((val, index)=> val===p[index]))
+        };
+        if(arrayEquals(o,p)){
+            setAnswerCheck(true);
         }else{
-            alert("incorrect")
+            setAnswerCheck(false);
         }
         
     }
 
+    function refreshPage(){
+        window.location.reload(false);
+    }
 
 
+    function Result(){
+        if(answerCheck ===true){
+            return(
+                <Alert severity="success">
+                    <AlertTitle>Current Answer</AlertTitle>
+                    Dobra Odpowiedź
+                    <Link href="#" variant="body2" onClick={refreshPage}>
+                        {"Następne pytanie"}
+                    </Link>
+                </Alert>
+            );
+        }
+        else if(answerCheck ===false){
+            return(<Alert severity="error">
+                <AlertTitle>Zła Odpowiedź</AlertTitle>
+                Spróbuj jeszcze raz
+            </Alert>);
+        }
+        else{
+            return <React.Fragment></React.Fragment>;
+        }
+    }
     return(
         <React.Fragment>
             <Header/>
@@ -80,6 +110,7 @@ export const RandomQuiz = ()=>{
                             <Button type="submit" variant="contained" endIcon={<SendIcon />} onClick={checkAnswer} >
                                 Submit Answer
                             </Button>
+                            <Result/>
                         </div>
                     ))}
                 </div>
